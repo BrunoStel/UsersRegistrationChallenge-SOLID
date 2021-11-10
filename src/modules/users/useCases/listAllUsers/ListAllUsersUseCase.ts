@@ -3,11 +3,15 @@ import { validate } from "uuid";
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
+interface IUserIdDTO {
+  user_id: string;
+}
+
 class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  execute({ user_id }): User[] {
+  execute({ user_id }: IUserIdDTO): User[] {
     if (!validate(user_id)) {
       throw new Error("ID is not valid");
     }
