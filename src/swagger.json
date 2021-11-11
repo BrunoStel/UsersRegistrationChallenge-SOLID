@@ -1,0 +1,177 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "title":"UserRegistration Documentation",
+        "description":"This is an API for registration of users",
+        "version":"1.0.0",
+        "contact":{
+            "email":"brunostel@gmail.com"
+        }
+    },
+    "paths":{
+        "/users":{
+            "post":{
+                "tags":["Users"],
+                "summary":"Create a new user",
+                "description":"Create a new user",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "name":{
+                                        "type":"string"
+                                    },
+                                    "email":{
+                                        "type":"string"
+                                    }
+                                }
+                            },
+                            "example":{
+                                "name":"Example name",
+                                "email":"example@example.com"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description":"Created"
+                    },
+                    "400":{
+                        "description":"Email is already taken"
+                    }
+                }
+            },
+            "get":{
+                "tags":["Users"],
+                "summary":"List all registered users",
+                "description":"Show the list of all registered users by an ADMIN account",
+                "parameters":[{
+                    "name": "user_id",
+                    "in": "header",
+                    "description": "uder_id to fetch",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                        }
+                    }],
+                "responses":{
+                    "200":{
+                        "description":"Sucess",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                        "name":{
+                                            "type":"string"
+                                        },
+                                        "email":{
+                                            "type":"string"
+                                        }                 
+                                    }
+                                }
+                                },
+                                "example":{
+                                    "name":"Example Name",
+                                    "email":"example@example.com"
+                                }
+                            }
+                    }
+                    },
+                    "400":{
+                        "description":"User isn't an ADMIN | ID is not valid | ID not found"
+                    }
+                        }
+                    }
+        },
+        "/users/{user_id}":{
+                "get":{
+            "tags":["Users"],
+            "summary":"Shows an specific user",
+            "description":"Shows an specific user",
+            "parameters":[{
+                "name": "user_id",
+                "in": "path",
+                "description": "uder_id to fetch",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                    }
+                }],
+            "responses":{
+                "200":{
+                    "description":"Sucess",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                "name":{
+                                    "type":"string"
+                                    },
+                                "email":{
+                                    "type":"string"
+                                    }                 
+                                }
+                            },
+                            "example":{
+                                "name":"Example Name",
+                                "email":"example@example.com"
+                            }
+                        }
+                }
+                },
+                "404":{
+                    "description":"User not found by this ID"
+                }
+                    }
+                }},
+        "/users/{user_id}/admin":{
+                "patch":{
+                    "tags":["Users"],
+                    "summary":"Turn an user into an ADMIN account",
+                    "description":"Turn an user into an ADMIN account",
+                    "parameters":[{
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "uder_id to fetch",
+                        "required": true,
+                        "schema": {
+                          "type": "string"
+                            }
+                        }],
+                    "responses":{
+                        "200":{
+                            "description":"Sucess",
+                            "content":{
+                                "application/json":{
+                                    "schema":{
+                                        "type":"object",
+                                        "properties":{
+                                        "name":{
+                                            "type":"string"
+                                            },
+                                        "email":{
+                                            "type":"string"
+                                            }                 
+                                        }
+                                    },
+                                    "example":{
+                                        "name":"Example Name",
+                                        "email":"example@example.com"
+                                    }
+                                }
+                        }
+                        }
+                            }
+                }
+            }
+        }
+    }
+
+
